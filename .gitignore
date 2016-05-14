@@ -1,0 +1,22 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Webstorm ide
+.idea/
+release/
+product/
+
+#redis
+dump.rdb
+
+#mac
+.DS_Store
+
+#bower
+bower_components
