@@ -5,11 +5,20 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/controllers/metricsController.js"></script>
+
+
 </head>
-<body>
+<body ng-app="netbnk" ng-controller="metricsController">
 
 <div class="jumbotron text-center">
-    <h1>Set your spending goals!<span class="label label-info"></span></h1>
+    <h1>Set your goals! {{metrics}}<span class="label label-info"></span></h1>
 </div>
 
 <form class="form-horizontal">

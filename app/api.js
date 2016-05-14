@@ -6,6 +6,11 @@ var baseURL = 'https://bluebank.azure-api.net/api/v0.6.3';
 var ocpKey = '02a62243728c4da9815414dbee605a1c';
 var bearer = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTczNDgxYjllMGEwYmVhMTFkYzRjYjZiIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjAyYTYyMjQzNzI4YzRkYTk4MTU0MTRkYmVlNjA1YTFjIiwiaWF0IjoxNDYzMTM1NTkwfQ.qSP7Mu5ETH9vffTkrnc4q-X0GlCc-FO7_kTIDqwVcp8';
 
+var path = require('path')
+
+var redis = require('redis')
+var rclient = redis.createClient()
+
 
 module.exports = function (app, passport) {
 //dashboard
@@ -31,7 +36,7 @@ module.exports = function (app, passport) {
 //following routes handle all requests within the pages
 
 //hue config details - POST
-    app.post('/rbs/v1/hue/devices', function (req, res) {
+    app.post('/netbnk/v1/hue/devices', function (req, res) {
         var hueIp = req.hue_ip;
         res.send({
             message: 'successfully registered',
@@ -41,47 +46,45 @@ module.exports = function (app, passport) {
 
 
 //Ideal metrics data - POST
-    app.post('/rbs/v1/metrics', function (req, res) {
-        console.log('entered values are: ' + JSON.parse(req.body));
+    app.post('/netbnk/v1/metrics', function (req, res) {
+        console.log(req.body);
         var idealInvestment = {};
         var idealSpends = {};
         var body = {};
         //investments
-        idealInvestment.bonds = req.bonds;
-        idealInvestment.stocks = req.stocks;
-        idealInvestment.insurance = req.insurance;
-        idealInvestment.mutualFund = req.mutualFund;
-        idealInvestment.fd = req.fd;
+        idealInvestment.bonds = req.body.idealInvestment.bonds;
+        idealInvestment.stocks = req.body.idealInvestment.stocks;
+        idealInvestment.insurance = req.body.idealInvestment.insurance;
+        idealInvestment.mutualFund = req.body.idealInvestment.mutualFund;
+        idealInvestment.fd = req.body.idealInvestment.fd;
+        idealInvestment.misc = req.body.idealInvestment.misc;
         //spends
-        idealSpends.rent = req.rent;
-        idealSpends.shopping = req.shopping;
-        idealSpends.travel = req.travel;
-        idealSpends.food = req.food;
-        idealSpends.emi = req.emi;
+        idealSpends.rent = req.body.idealSpends.rent;
+        idealSpends.shopping = req.body.idealSpends.shopping;
+        idealSpends.travel = req.body.idealSpends.travel;
+        idealSpends.food = req.body.idealSpends.food;
+        idealSpends.emi = req.body.idealSpends.emi;
+        idealSpends.misc = req.body.idealSpends.misc;
         //body
+
         body.idealInvestment = idealInvestment;
         body.idealSpends = idealSpends;
-        //prepare options
-        var options = {
-            method: 'POST',
-            url: 'http://12.0.0.1:300/rbs/v1/metrics',
-            headers: {},
-            body: body
-        };
-        //send the data using request
-        request(options, function (err, res, body) {
+        body.mobileNumber = req.body.mobileNumber;
+
+        rclient.set('idealMetrics:'+body.mobileNumber, JSON.stringify(body), function (err, result) {
             if (err) {
                 console.log(err)
+                res.status(400).json({msg: 'failed to store data'})
+            } else {
+                res.json({message: 'successfully stored data in backend..'})
             }
-            else {
-                res.send(body)
-            }
-        });
+        })
+
 
     });
 
 //get list of transactions - GET
-    app.get('/rbs/v1/transactions', function (req, res) {
+    app.get('/netbnk/v1/transactions', function (req, res) {
         getTransactions(req.customer_id, req.account_id, function (err, response) {
             res.json(response);
         });
@@ -107,7 +110,7 @@ module.exports = function (app, passport) {
     };
 
 //get a single transaction
-    app.get('/rbs/v1/transactions/:transaction_id', function (req, res) {
+    app.get('/netbnk/v1/transactions/:transaction_id', function (req, res) {
         getTransactionDetails(req.c_id, req.account_id, req.t_id, function (err, response) {
             if (err) {
                 console.log(err)
@@ -138,12 +141,12 @@ module.exports = function (app, passport) {
     };
 
 //post a single payment - POST
-    app.post('/rbs/v1/payments', function (req, res) {
+    app.post('/netbnk/v1/payments', function (req, res) {
         res.send('Payment added!');
     });
 
 //get all payments - GET
-    app.get('/rbs/v1/payments', function (req, res) {
+    app.get('/netbnk/v1/payments', function (req, res) {
         getPayments(req.customer_id, req.account_id, function (err, response) {
             res.json(response);
         });
@@ -170,7 +173,7 @@ module.exports = function (app, passport) {
     };
 
 //get a single payment - GET
-    app.get('/rbs/v1/payments/:p_id', function (req, res) {
+    app.get('/netbnk/v1/payments/:p_id', function (req, res) {
         getPayment(req.customer_id, req.account_id, req.p_id, function (err, response) {
             res.json(response);
         });
