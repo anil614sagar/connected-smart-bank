@@ -52,24 +52,24 @@ module.exports = function (app, passport) {
         var idealSpends = {};
         var body = {};
         //investments
-        idealInvestment.bonds = req.body.idealInvestment.bonds;
-        idealInvestment.stocks = req.body.idealInvestment.stocks;
-        idealInvestment.insurance = req.body.idealInvestment.insurance;
-        idealInvestment.mutualFund = req.body.idealInvestment.mutualFund;
-        idealInvestment.fd = req.body.idealInvestment.fd;
-        idealInvestment.misc = req.body.idealInvestment.misc;
+        idealInvestment.bonds = req.body.data.idealInvestment.bonds;
+        idealInvestment.stocks = req.body.data.idealInvestment.stocks;
+        idealInvestment.insurance = req.body.data.idealInvestment.insurance;
+        idealInvestment.mutualFund = req.body.data.idealInvestment.mutualFund;
+        idealInvestment.fd = req.body.data.idealInvestment.fd;
+        idealInvestment.misc = req.body.data.idealInvestment.misc;
         //spends
-        idealSpends.rent = req.body.idealSpends.rent;
-        idealSpends.shopping = req.body.idealSpends.shopping;
-        idealSpends.travel = req.body.idealSpends.travel;
-        idealSpends.food = req.body.idealSpends.food;
-        idealSpends.emi = req.body.idealSpends.emi;
-        idealSpends.misc = req.body.idealSpends.misc;
+        idealSpends.rent = req.body.data.idealSpend.rent;
+        idealSpends.shopping = req.body.data.idealSpend.shopping;
+        idealSpends.travel = req.body.data.idealSpend.travel;
+        idealSpends.food = req.body.data.idealSpend.food;
+        idealSpends.emi = req.body.data.idealSpend.emi;
+        idealSpends.misc = req.body.data.idealSpend.misc;
         //body
 
         body.idealInvestment = idealInvestment;
         body.idealSpends = idealSpends;
-        body.mobileNumber = req.body.mobileNumber;
+        body.mobileNumber = req.body.data.mobileNumber;
 
         rclient.set('idealMetrics:'+body.mobileNumber, JSON.stringify(body), function (err, result) {
             if (err) {
@@ -78,10 +78,10 @@ module.exports = function (app, passport) {
             } else {
                 res.json({message: 'successfully stored data in backend..'})
             }
-        })
-
-
+        });
     });
+
+    
 
 //get list of transactions - GET
     app.get('/netbnk/v1/transactions', function (req, res) {

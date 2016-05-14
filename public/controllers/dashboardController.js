@@ -3,5 +3,5 @@ netbnk.controller('dashboardController', ['$scope', '$stateParams', '$state', fu
   $scope.busyApp = true;
   $scope.dashboard = 'coming very soon...'
 
-  //TODO services
+
 }])
