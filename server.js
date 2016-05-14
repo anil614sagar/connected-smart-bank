@@ -8,13 +8,16 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var favicon = require('serve-favicon');
 
+nconf.argv()
+  .env()
+  .use('file', { file: './config/server.json' });
 
 
 // Creating our App with Express
 var app      = express();
 
 // Load Favicon
-app.use(favicon(__dirname + '/public/img/favicon.ico'));
+app.use(favicon(__dirname + '/public/images/rbs-favicon.gif'));
 
 app.use('/bower_components',  express.static(__dirname + '/bower_components'))
 

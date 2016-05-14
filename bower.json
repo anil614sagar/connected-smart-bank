@@ -1,0 +1,23 @@
+{
+  "name": "connected-smart-bank",
+  "version": "0.0.1",
+  "homepage": "https://github.com/anil614sagar/connected-smart-bank",
+  "authors": [
+    "anil614sagar <anil614sagar@gmail.com>"
+  ],
+  "description": "Smart Connected Bank RBS",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "~0.2.18",
+    "angular": "~1.5.5",
+    "jquery": "~2.2.3",
+    "bootstrap": "~3.3.6"
+  }
+}
