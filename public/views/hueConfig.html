@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        html 					{ overflow-y:scroll; }
+        body 					{ padding-top:50px; }
+        .center                 { text-align: center; }
+        .right                   { text-align: right; }
+    </style>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+</head>
+
+<body>
+
+<div class="jumbotron text-center">
+    <h1>Configure Philips Hue<span class="label label-info"></span></h1>
+</div>
+<br>
+<br>
+<br>
+<br>
+<form class="form-horizontal">
+    <fieldset>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="Name">Philips User Name</label>
+            <div class="col-md-4">
+                <input id="Name" name="Name" type="text" placeholder="Philips Username" class="form-control input-md" required="">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="Philips_id">Philips Hue Ip Address</label>
+            <div class="col-md-4">
+                <input id="Philips_id" name="Philips_id" type="text" placeholder="Philips IP address" class="form-control input-md" required="">
+            </div>
+        </div>
+
+
+        <div class="row-fluid text-center">
+            <button id="Login" name="Login" class="btn btn-danger span4" ng-click = "send">Add Hue!</button>
+        </div>
+
+    </fieldset>
+</form>
+
+</body>
+</html>

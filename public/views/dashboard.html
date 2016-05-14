@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Work',     15],
+                ['Eat',      2],
+                ['Commute',  2],
+                ['Watch TV', 2],
+                ['Sleep',    7]
+            ]);
+
+            var options = {
+                title: 'My Daily Activities',
+                pieHole: 0.4,
+                slices: {
+                    0: { color: '#FF4C65' },
+                    1: { color: '#DC403B'},
+                    2: { color: '#FFC33C'},
+                    3: { color: '#55BDBE'},
+                    4: { color: '#00C8F8'},
+                }
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            var chart1 = new google.visualization.PieChart(document.getElementById('donutchart1'));
+            var chart2 = new google.visualization.PieChart(document.getElementById('donutchart2'));
+            var chart3 = new google.visualization.PieChart(document.getElementById('donutchart3'));
+
+            chart.draw(data, options);
+
+            chart1.draw(data, options);
+
+            chart2.draw(data, options);
+
+            chart3.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">DashBoard</a>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="span8">
+        <div class="row col-md-10 ">
+                <div class="col-md-5">
+                    <div id="donutchart" style="width: 450px; height: 400px;"></div>
+                </div>
+                <div class="col-md-5">
+                    <div class="col-md-4" id="donutchart1" style="width: 450px; height: 400px;"></div>
+                </div>
+        </div>
+
+        <div class="row col-md-10">
+            <div class="col-md-5">
+                <div id="donutchart2" style="width: 450px; height: 400px;"></div>
+            </div>
+            <div class="col-md-5">
+                <div id="donutchart3" style="width: 450px; height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="span4" style=" height: 720px; overflow:scroll;">
+        <div class="panel panel-danger"  style=" width: 100%">
+            <div class="panel-heading">Suggestions</div>
+                <div id="content" style="padding: 5px;">
+            <p>
+                Bootstrap is a free front-end framework for faster and easier web development
+                Bootstrap includes HTML and CSS based design templates for typography, forms, buttons, tables, navigation, modals, image carousels and many other, as well as optional JavaScript plugins
+                Bootstrap also gives you the ability to easily create responsive designs
+                Note	What is Responsive Web Design?
+                Responsive web design is about creating web sites which automatically adjust themselves to look good on all devices, from small phones to large desktops.
+                If you’re anything like me, then this post has inspired you to brush up on your color theory and the skills necessary to put it to good use on your next project, in which case I highly recommend checking out the following articles:
+
+                applying color theory to web design,
+                understanding the code behind your color swatches,
+                learning how to assemble your own palette,
+                and our own Betterment article on color theory.
+                If there are any colors you’re dying to know more about, ColorHexa (which certainly “looks like the Wolfram Alpha of color”) can help you out.
+
+                We’ve also had an awesome commenter, Dima, make a GPL file of these palettes that works with GIMP, Inkscape, etc., which can be copied in (~/.config/inkscape/palettes/ or ~/.gimp-2.8/palettes/) and has a white separator between each palette.
+
+                Time for some discussion: Where do you find your color inspiration? From photographs, the web, or fabrics? What’s the certified, 100% best way to get that colorful spark? Tell us all about it in the comments below!
+
+                If you get a thrill out of solving complex business problems and enjoy surrounding yourself with smart, driven, hilarious people, we’re looking for a Senior UX/UI Designer just like you.
+
+                Check out what life could be like at DT
+
+            </p>
+                </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
