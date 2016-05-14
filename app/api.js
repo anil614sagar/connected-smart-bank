@@ -2,14 +2,16 @@
  * Created by ndavuluru on 14/05/16.
  */
 
-
-var path = require('path')
-var extend = require('util')._extend
-var request = require('request')
-var url = require('url')
+var baseURL = 'https://bluebank.azure-api.net/api/v0.6.3';
+var ocpKey = '02a62243728c4da9815414dbee605a1c';
+var bearer = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTczNDgxYjllMGEwYmVhMTFkYzRjYjZiIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjAyYTYyMjQzNzI4YzRkYTk4MTU0MTRkYmVlNjA1YTFjIiwiaWF0IjoxNDYzMTM1NTkwfQ.qSP7Mu5ETH9vffTkrnc4q-X0GlCc-FO7_kTIDqwVcp8';
 
 
 module.exports = function (app, passport) {
+//dashboard
+    app.get('/dashboard', function (req, res) {
+        res.sendFile(path.resolve('public/views/dashboard.html'));
+    });
 
 //transactions
     app.get('/transactions', function (req, res) {
@@ -80,18 +82,18 @@ module.exports = function (app, passport) {
 
 //get list of transactions - GET
     app.get('/rbs/v1/transactions', function (req, res) {
-        getTransactions(function (err, response) {
+        getTransactions(req.customer_id, req.account_id, function (err, response) {
             res.json(response);
         });
     });
 
-    var getTransactions = function (callback) {
+    var getTransactions = function (c_id, acc_id, callback) {
         var options = {
             method: 'GET',
-            url: baseURL + '/accounts/' + cust_id + '/transactions',
+            url: baseURL + '/customers/' + c_id + '/accounts/' + acc_id + '/transactions',
             headers: {
                 'Ocp-Apim-Subscription-Key': ocpKey,
-                'bearer': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTczNDgxYjllMGEwYmVhMTFkYzRjYjZiIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjAyYTYyMjQzNzI4YzRkYTk4MTU0MTRkYmVlNjA1YTFjIiwiaWF0IjoxNDYzMTM1NTkwfQ.qSP7Mu5ETH9vffTkrnc4q-X0GlCc-FO7_kTIDqwVcp8'
+                'bearer': bearer
             }
         };
         request(options, function (err, body) {
@@ -106,7 +108,7 @@ module.exports = function (app, passport) {
 
 //get a single transaction
     app.get('/rbs/v1/transactions/:transaction_id', function (req, res) {
-        getTransactionDetails(req.t_id, function (err, response) {
+        getTransactionDetails(req.c_id, req.account_id, req.t_id, function (err, response) {
             if (err) {
                 console.log(err)
             }
@@ -116,13 +118,13 @@ module.exports = function (app, passport) {
         });
     });
 
-    var getTransactionDetails = function (t_id, callback) {
+    var getTransactionDetails = function (customer_id, acc_id, t_id, callback) {
         var options = {
             method: 'GET',
-            url: baseURL + '/customers/' + cust_id + '/transactions/' + t_id,
+            url: baseURL + '/customers/' + customer_id + '/accounts/' + acc_id + '/transactions/' + t_id,
             headers: {
                 'Ocp-Apim-Subscription-Key': ocpKey,
-                'bearer': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTczNDgxYjllMGEwYmVhMTFkYzRjYjZiIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjAyYTYyMjQzNzI4YzRkYTk4MTU0MTRkYmVlNjA1YTFjIiwiaWF0IjoxNDYzMTM1NTkwfQ.qSP7Mu5ETH9vffTkrnc4q-X0GlCc-FO7_kTIDqwVcp8'
+                'bearer': bearer
             } //bearer - token, ocp - key
         };
         request(options, function (err, body) {
@@ -137,25 +139,24 @@ module.exports = function (app, passport) {
 
 //post a single payment - POST
     app.post('/rbs/v1/payments', function (req, res) {
-
-
+        res.send('Payment added!');
     });
 
 //get all payments - GET
     app.get('/rbs/v1/payments', function (req, res) {
-        getPayments(function (err, response) {
+        getPayments(req.customer_id, req.account_id, function (err, response) {
             res.json(response);
         });
     });
 
-    var getPayments = function (callback) {
+    var getPayments = function (cust_id, account_id, callback) {
         var options = {
             method: 'GET',
-            url: baseURL + '/accounts/' + cust_id + '/payments',
+            url: baseURL + '/customers/' + cust_id + '/accounts/' + account_id + '/payments',
             headers: {
                 //bearer and ocp apim keys from request body
                 'Ocp-Apim-Subscription-Key': ocpKey,
-                'bearer': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTczNDgxYjllMGEwYmVhMTFkYzRjYjZiIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjAyYTYyMjQzNzI4YzRkYTk4MTU0MTRkYmVlNjA1YTFjIiwiaWF0IjoxNDYzMTM1NTkwfQ.qSP7Mu5ETH9vffTkrnc4q-X0GlCc-FO7_kTIDqwVcp8'
+                'bearer': bearer
             }
         };
         request(options, function (err, body) {
@@ -170,18 +171,18 @@ module.exports = function (app, passport) {
 
 //get a single payment - GET
     app.get('/rbs/v1/payments/:p_id', function (req, res) {
-        getPayment(req.p_id, function (err, response) {
+        getPayment(req.customer_id, req.account_id, req.p_id, function (err, response) {
             res.json(response);
         });
     });
 
-    var getPayment = function (id, callback) {
+    var getPayment = function (c_id, a_id, p_id, callback) {
         var options = {
             method: 'GET',
-            url: baseURL + '/customers/' + cust_id + '/payments' + id,
+            url: baseURL + '/customers/' + cust_id + '/accounts/' + a_id + '/payments' + id,
             headers: {
                 'Ocp-Apim-Subscription-Key': ocpKey,
-                'bearer': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTczNDgxYjllMGEwYmVhMTFkYzRjYjZiIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjAyYTYyMjQzNzI4YzRkYTk4MTU0MTRkYmVlNjA1YTFjIiwiaWF0IjoxNDYzMTM1NTkwfQ.qSP7Mu5ETH9vffTkrnc4q-X0GlCc-FO7_kTIDqwVcp8'
+                'bearer': bearer
             }
         };
         request(options, function (err, body) {

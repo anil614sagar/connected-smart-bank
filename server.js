@@ -55,6 +55,7 @@ require('./app/passport')(passport); // pass passport for configuration
 
 // routes ==================================================
 require('./app/routes')(app, passport); // configure our routes
+require('./app/api')(app, passport); // configure our routes
 
 require('./app/api')(app, passport); // configure our routes
 
