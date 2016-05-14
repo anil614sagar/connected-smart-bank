@@ -85,16 +85,17 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">DashBoard</a>
+            <a class="navbar-brand" href="#">Dashboard</a>
         </div>
+        <h4 class="pull-right" style="text-align: center">+919600094244</h4>
     </div>
 </nav>
 
 <div class="page-header">
-    <h1>NET BNK, <small>Welcome to a connected Banking experience.</small></h1>
+    <h1>&nbspNETBNK, <small>welcome to a connected banking experience.</small></h1>
 </div>
 
-<div style="padding: 20px">
+<div style="padding: 20px; width: 450px;">
     <div class="alert alert-success" role="alert">
         <h4>Connected Bank Accounts are listed below,</h4>
     </div>
@@ -102,21 +103,24 @@
 <div class="row" style="padding: 10px">
     <div class="col-sm-6" style="width: 50%;">
         <ul class="list-group">
-            <li class="list-group-item list-group-item-warning">Bank : Deutsche Bank AG</li>
-            <li class="list-group-item list-group-item-info">Account Number : 122000661</li>
-            <li class="list-group-item list-group-item-success">Account Balance : 27,000 INR</li>
+            <li class="list-group-item disabled"><font color="black">Bank : Deutsche Bank AG</font></li>
+            <li class="list-group-item "><font color="black">Account Number : 122000661</font></li>
+            <li class="list-group-item disabled"><font color="black">Account Balance : 27,000 INR</font></li>
+            <li class="list-group-item "><font color="black">Phone Number : +919600094244</font></li>
         </ul>
     </div>
     <div class="col-sm-6" style="width: 50%;">
     <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-warning">Bank : HDFC Bank Limited</a>
-        <a href="#" class="list-group-item list-group-item-info">Account Number : 122000699</a>
-        <a href="#" class="list-group-item list-group-item-success">Account Balance : 44,000 INR</a>
+        <li href="#" class="list-group-item disabled"><font color="black">Bank : HDFC Bank Limited</font></li>
+        <li href="#" class="list-group-item "><font color="black">Account Number : 122000699</font></li>
+        <li href="#" class="list-group-item disabled"><font color="black">Account Balance : 44,000 INR</font></li>
+        <li class="list-group-item "><font color="black">Phone Number : +919600094244</font></li>
+
     </div>
     </div>
 </div>
 
-<div class="container">
+<div class="fluid-container">
     <div class="span8">
         <div class="row">
                 <div class="col-md-4">
@@ -154,33 +158,149 @@
         <div class="panel panel-danger"  style=" width: 100%">
             <div class="panel-heading">Suggestions</div>
             <div id="content" style="padding: 5px;">
-                <p>
-                    Bootstrap is a free front-end framework for faster and easier web development
-                    Bootstrap includes HTML and CSS based design templates for typography, forms, buttons, tables, navigation, modals, image carousels and many other, as well as optional JavaScript plugins
-                    Bootstrap also gives you the ability to easily create responsive designs
-                    Note	What is Responsive Web Design?
-                    Responsive web design is about creating web sites which automatically adjust themselves to look good on all devices, from small phones to large desktops.
-                    If you’re anything like me, then this post has inspired you to brush up on your color theory and the skills necessary to put it to good use on your next project, in which case I highly recommend checking out the following articles:
-
-                    applying color theory to web design,
-                    understanding the code behind your color swatches,
-                    learning how to assemble your own palette,
-                    and our own Betterment article on color theory.
-                    If there are any colors you’re dying to know more about, ColorHexa (which certainly “looks like the Wolfram Alpha of color”) can help you out.
-
-                    We’ve also had an awesome commenter, Dima, make a GPL file of these palettes that works with GIMP, Inkscape, etc., which can be copied in (~/.config/inkscape/palettes/ or ~/.gimp-2.8/palettes/) and has a white separator between each palette.
-
-                    Time for some discussion: Where do you find your color inspiration? From photographs, the web, or fabrics? What’s the certified, 100% best way to get that colorful spark? Tell us all about it in the comments below!
-
-                    If you get a thrill out of solving complex business problems and enjoy surrounding yourself with smart, driven, hilarious people, we’re looking for a Senior UX/UI Designer just like you.
-
-                    Check out what life could be like at DT
-
-                </p>
+                <ul class="list-group">
+                    <li class="list-group-item"><b>Short-term Fixed Deposit Rates upto 7.25%</b>; SBI offers short-term deposits from interest rates of 5.25% p.a. to 7.25% p.a.,quarterly compounded.</li>
+                    <li class="list-group-item"><b>Senior Citizens FD Rates;</b>The rates of interest range from 5% for a 30 day term to 7.25% for a 5 year FD</li>
+                    <li class="list-group-item"><b> Medium and Long-Term FD Rates;</b>These rates hover around the 9% mark which is featured on schemes with tenures between 1 to 3 years.</li>
+                </ul>
             </div>
         </div>
 
     </div>
+
+    <div style="padding: 5px; width: 160px;" >
+        <div class="alert alert-success" role="alert">
+            <h4>Transactions : </h4>
+        </div>
+    </div>
+    <div class="panel panel-danger"  style=" width: 100%">
+        <div class="panel-heading"><h4>Deutsche Bank AG</h4></div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Bank Name</th>
+                <th>Account ID</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Tag</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2012-12-31 23:59:59</td>
+                <td>HDFC Bank</td>
+                <td>xxxxx0661</td>
+                <td>Rent</td>
+                <td>Debit</td>
+                <td>4000 INR</td>
+                <td>Rent</td>
+            </tr>
+            <tr>
+                <td>2012-12-30 22:50:56</td>
+                <td>Axis Bank</td>
+                <td>xxxxx0761</td>
+                <td>Commute</td>
+                <td>Debit</td>
+                <td>200 INR</td>
+                <td>Travel</td>
+            </tr>
+            <tr>
+                <td>2012-12-20 21:50:56</td>
+                <td>Citibank</td>
+                <td>xxxxx0561</td>
+                <td>Salary</td>
+                <td>Credit</td>
+                <td>30,000 INR</td>
+                <td>Pay</td>
+            </tr>
+            <tr>
+                <td>2012-12-19 10:50:56</td>
+                <td>ICICI Bank</td>
+                <td>xxxxx0481</td>
+                <td>Interest</td>
+                <td>Credit</td>
+                <td>480 INR</td>
+                <td>Fixed Deposit</td>
+            </tr>
+            <tr>
+                <td>2012-12-16 7:50:56</td>
+                <td>HDFC Bank</td>
+                <td>xxxxx0451</td>
+                <td>New Shoes</td>
+                <td>Debit</td>
+                <td>800 INR</td>
+                <td>Shopping</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel panel-info"  style=" width: 100%">
+        <div class="panel-heading"><h4>HDFC Bank Limited</h4></div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Bank Name</th>
+                <th>Account ID</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Tag</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2012-10-31 23:59:59</td>
+                <td>HDFC Bank</td>
+                <td>xxxxx0661</td>
+                <td>Rent</td>
+                <td>Debit</td>
+                <td>400 INR</td>
+                <td>Food</td>
+            </tr>
+            <tr>
+                <td>2012-10-30 22:50:56</td>
+                <td>HSBC Bank</td>
+                <td>xxxxx0761</td>
+                <td>Flight Ticket</td>
+                <td>Debit</td>
+                <td>2000 INR</td>
+                <td>Travel</td>
+            </tr>
+            <tr>
+                <td>2012-11-20 21:50:56</td>
+                <td>Citibank</td>
+                <td>xxxxx0561</td>
+                <td>Stock Dividend</td>
+                <td>Credit</td>
+                <td>30,000 INR</td>
+                <td>Stocks</td>
+            </tr>
+            <tr>
+                <td>2012-11-19 10:50:56</td>
+                <td>ICICI Bank</td>
+                <td>xxxxx0481</td>
+                <td>Interest</td>
+                <td>Credit</td>
+                <td>480 INR</td>
+                <td>Fixed Deposit</td>
+            </tr>
+            <tr>
+                <td>2012-11-16 7:50:56</td>
+                <td>HSBC Bank</td>
+                <td>xxxxx0451</td>
+                <td>New Shoes</td>
+                <td>Credit</td>
+                <td>800 INR</td>
+                <td>Bonds</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 </body>
 </html>
