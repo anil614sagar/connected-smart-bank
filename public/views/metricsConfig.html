@@ -32,10 +32,11 @@
 
                     <div class="col-md-5" style="padding: 10px;">
 
-                        <label class="row control-label" for="textinput" >Stocks</label>
+                        <label class="row control-label" for="textinput">Stocks</label>
                         <div class="row">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                <input type="text" class="form-control" ng-model="stock" id="exampleInputAmount"
+                                       placeholder="Amount">
                                 <div class="input-group-addon">%</div>
                             </div>
                         </div>
@@ -43,7 +44,7 @@
                         <label class="row control-label" for="textinput">Insurance</label>
                         <div class="row">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                <input type="text" class="form-control" ng-model= "insurance" id="exampleInputAmount" placeholder="Amount">
                                 <div class="input-group-addon">%</div>
                             </div>
                         </div>
@@ -51,7 +52,7 @@
                         <label class="row control-label" for="textinput">Mutual Funds</label>
                         <div class="row">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                <input type="text" class="form-control" ng-model= "mutualFunds" id="exampleInputAmount" placeholder="Amount">
                                 <div class="input-group-addon">%</div>
                             </div>
                         </div>
@@ -59,7 +60,7 @@
                         <label class="row control-label" for="textinput">Fixed Deposits</label>
                         <div class="row">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                <input type="text" class="form-control" ng-model= "fd" id="exampleInputAmount" placeholder="Amount">
                                 <div class="input-group-addon">%</div>
                             </div>
                         </div>
@@ -67,69 +68,70 @@
                         <label class="row control-label" for="textinput">Bonds</label>
                         <div class="row">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                <input type="text" class="form-control" ng-model= "bonds" id="exampleInputAmount" placeholder="Amount">
                                 <div class="input-group-addon">%</div>
                             </div>
-                         </div>
-                     </div>
+                        </div>
+                    </div>
                 </div>
 
-            <div class="col-md-5 panel panel-danger  pull-right" style="text-align:center; ">
+                <div class="col-md-5 panel panel-danger  pull-right" style="text-align:center; ">
 
-                <div class="panel-heading"><h4>Expenditure</h4></div>
+                    <div class="panel-heading"><h4>Expenditure</h4></div>
 
-                <div class="col-md-5 " style="padding: 10px;">
+                    <div class="col-md-5 " style="padding: 10px;">
 
-                    <label class="row control-label" for="textinput">Travel</label>
-                    <div class="row">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-                            <div class="input-group-addon">%</div>
+                        <label class="row control-label" for="textinput">Travel</label>
+                        <div class="row">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model= "travel" id="exampleInputAmount" placeholder="Amount">
+                                <div class="input-group-addon">%</div>
+                            </div>
                         </div>
+
+                        <label class="row control-label" for="textinput">Food</label>
+                        <div class="row">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model= "food" id="exampleInputAmount" placeholder="Amount">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+
+                        <label class="row control-label" for="textinput">Rent</label>
+                        <div class="row">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model= "rent" id="exampleInputAmount" placeholder="Amount">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+
+                        <label class="row control-label" for="textinput">Shopping</label>
+                        <div class="row">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model= "shopping" id="exampleInputAmount" placeholder="Amount">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+
+                        <label class="row control-label" for="textinput">EMI</label>
+                        <div class="row">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model= "emi" id="exampleInputAmount" placeholder="Amount">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <label class="row control-label" for="textinput">Food</label>
-                    <div class="row">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-                            <div class="input-group-addon">%</div>
-                        </div>
-                    </div>
-
-                    <label class="row control-label" for="textinput">Rent</label>
-                    <div class="row">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-                            <div class="input-group-addon">%</div>
-                        </div>
-                    </div>
-
-                    <label class="row control-label" for="textinput">Shopping</label>
-                    <div class="row">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-                            <div class="input-group-addon">%</div>
-                        </div>
-                    </div>
-
-                    <label class="row control-label" for="textinput">EMI</label>
-                    <div class="row">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-                            <div class="input-group-addon">%</div>
-                        </div>
-                    </div>
-
-                 </div>
-
-            </div>
+                </div>
             </div>
         </div>
     </fieldset>
 </form>
 
 <div class="row-fluid text-center ">
-    <button id="Login" name="Login" class="btn btn-success btn-lg" style="width: 150px; height: 60px;"><h4>Save!</h4></button>
+    <button id="Login" name="Login" ng-click="save()" class="btn btn-success btn-lg"
+            style="width: 150px; height: 60px;"><h4>Save!</h4></button>
 </div>
 
 
