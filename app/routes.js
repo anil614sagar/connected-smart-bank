@@ -11,6 +11,10 @@ module.exports = function (app, passport) {
     res.sendFile(path.resolve('public/views/landing.html'));
   });
 
+  app.get('/dashboard',isLoggedIn, function (req, res) {
+    res.sendFile(path.resolve('public/views/dashboard.html'));
+  });
+
   // user information api call
   app.get('/user', function (req, res) {
     if (req.isAuthenticated()) {

@@ -56,6 +56,8 @@ require('./app/passport')(passport); // pass passport for configuration
 // routes ==================================================
 require('./app/routes')(app, passport); // configure our routes
 
+require('./app/api')(app, passport); // configure our routes
+
 // listen (start app with node server.js) ======================================
 app.listen(nconf.get('server:port'));
 // Log that App is running on port 3000

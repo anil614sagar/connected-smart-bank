@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>RBS - Smart Connected Bank</title>
+    <title>NETBNK - Connected Bnk of Banks</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
@@ -67,7 +67,7 @@
              */
             function onDigitsSuccess(response) {
                 console.log('Digits phone number retrieved.')
-                setDigitsNumber(response.phoneNumber);
+                window.location="/dashboard";
             }
 
             /**
@@ -113,6 +113,11 @@
         a.digits-button.btn.btn-secondary.btn-lg.btn-block.btn-success {
             width: 30%;
             margin: 0 auto;
+            background-color: #2869A9;
+        }
+
+        .jumbotron h1 {
+            color: #FF4B00;
         }
 
     </style>
