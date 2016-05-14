@@ -4,10 +4,12 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.charts.load("current", {packages:["corechart"]});
+        google.charts.load("current", {packages:["corechart",'gauge']});
+
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
+
             var data = google.visualization.arrayToDataTable([
                 ['Task', 'Hours per Day'],
                 ['Work',     15],
@@ -16,6 +18,31 @@
                 ['Watch TV', 2],
                 ['Sleep',    7]
             ]);
+
+            var data_gauge = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['InvesFit', 68]
+            ]);
+
+            var data_gauge1 = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['SpendFit', 68]
+            ]);
+
+            var options_gauge = {
+                width: 150,
+                height: 150,
+                redFrom: 0,
+                redTo: 6,
+                yellowFrom: 6,
+                yellowTo: 15,
+                greenFrom: 15,
+                greenTo: 20,
+                minorTicks: 20,
+                max: 20,
+                min: 0,
+                majorTicks: ['20', '1']
+            };
 
             var options = {
                 title: 'My Daily Activities',
@@ -34,6 +61,13 @@
             var chart2 = new google.visualization.PieChart(document.getElementById('donutchart2'));
             var chart3 = new google.visualization.PieChart(document.getElementById('donutchart3'));
 
+            var chart_gauge_1 = new google.visualization.Gauge(document.getElementById('chart_div'));
+            var chart_gauge_2 = new google.visualization.Gauge(document.getElementById('chart_div1'));
+
+            chart_gauge_1.draw(data_gauge, options_gauge);
+            chart_gauge_2.draw(data_gauge1, options_gauge);
+
+
             chart.draw(data, options);
 
             chart1.draw(data, options);
@@ -41,6 +75,8 @@
             chart2.draw(data, options);
 
             chart3.draw(data, options);
+
+            console.log("Works")
         }
     </script>
 </head>
@@ -54,56 +90,96 @@
     </div>
 </nav>
 
+<div class="page-header">
+    <h1>NET BNK, <small>Welcome to a connected Banking experience.</small></h1>
+</div>
+
+<div style="padding: 20px">
+    <div class="alert alert-success" role="alert">
+        <h4>Connected Bank Accounts are listed below,</h4>
+    </div>
+</div>
+<div class="row" style="padding: 10px">
+    <div class="col-sm-6" style="width: 50%;">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-warning">Bank : Deutsche Bank AG</li>
+            <li class="list-group-item list-group-item-info">Account Number : 122000661</li>
+            <li class="list-group-item list-group-item-success">Account Balance : 27,000 INR</li>
+        </ul>
+    </div>
+    <div class="col-sm-6" style="width: 50%;">
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-warning">Bank : HDFC Bank Limited</a>
+        <a href="#" class="list-group-item list-group-item-info">Account Number : 122000699</a>
+        <a href="#" class="list-group-item list-group-item-success">Account Balance : 44,000 INR</a>
+    </div>
+    </div>
+</div>
 
 <div class="container">
     <div class="span8">
-        <div class="row col-md-10 ">
-                <div class="col-md-5">
-                    <div id="donutchart" style="width: 450px; height: 400px;"></div>
+        <div class="row">
+                <div class="col-md-4">
+                    <div id="donutchart"  style="width: 450px; height: 300px;"></div>
                 </div>
-                <div class="col-md-5">
-                    <div class="col-md-4" id="donutchart1" style="width: 450px; height: 400px;"></div>
+                <div class="col-md-4">
+                    <div  id="donutchart1" style="width: 450px; height: 300px;"></div>
                 </div>
+                <br>
+                <br>
+                <br>
+                <div class="col-md-4" style="text-align: center">
+                    <div class="col-md-4" id="chart_div" style="width: 450px; height: 300px;"></div>
+                </div>
+
         </div>
 
-        <div class="row col-md-10">
-            <div class="col-md-5">
-                <div id="donutchart2" style="width: 450px; height: 400px;"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div id="donutchart2" style="width: 450px; height: 300px;"></div>
             </div>
-            <div class="col-md-5">
-                <div id="donutchart3" style="width: 450px; height: 400px;"></div>
+            <div class="col-md-4">
+                <div id="donutchart3" style="width: 450px; height: 300px;"></div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="col-md-4" style="text-align: center">
+                <div class="col-md-4" id="chart_div1" style="width: 450px; height: 300px;"></div>
             </div>
         </div>
     </div>
-    <div class="span4" style=" height: 720px; overflow:scroll;">
+
+    <div style=" height: 720px; overflow:scroll;">
         <div class="panel panel-danger"  style=" width: 100%">
             <div class="panel-heading">Suggestions</div>
-                <div id="content" style="padding: 5px;">
-            <p>
-                Bootstrap is a free front-end framework for faster and easier web development
-                Bootstrap includes HTML and CSS based design templates for typography, forms, buttons, tables, navigation, modals, image carousels and many other, as well as optional JavaScript plugins
-                Bootstrap also gives you the ability to easily create responsive designs
-                Note	What is Responsive Web Design?
-                Responsive web design is about creating web sites which automatically adjust themselves to look good on all devices, from small phones to large desktops.
-                If you’re anything like me, then this post has inspired you to brush up on your color theory and the skills necessary to put it to good use on your next project, in which case I highly recommend checking out the following articles:
+            <div id="content" style="padding: 5px;">
+                <p>
+                    Bootstrap is a free front-end framework for faster and easier web development
+                    Bootstrap includes HTML and CSS based design templates for typography, forms, buttons, tables, navigation, modals, image carousels and many other, as well as optional JavaScript plugins
+                    Bootstrap also gives you the ability to easily create responsive designs
+                    Note	What is Responsive Web Design?
+                    Responsive web design is about creating web sites which automatically adjust themselves to look good on all devices, from small phones to large desktops.
+                    If you’re anything like me, then this post has inspired you to brush up on your color theory and the skills necessary to put it to good use on your next project, in which case I highly recommend checking out the following articles:
 
-                applying color theory to web design,
-                understanding the code behind your color swatches,
-                learning how to assemble your own palette,
-                and our own Betterment article on color theory.
-                If there are any colors you’re dying to know more about, ColorHexa (which certainly “looks like the Wolfram Alpha of color”) can help you out.
+                    applying color theory to web design,
+                    understanding the code behind your color swatches,
+                    learning how to assemble your own palette,
+                    and our own Betterment article on color theory.
+                    If there are any colors you’re dying to know more about, ColorHexa (which certainly “looks like the Wolfram Alpha of color”) can help you out.
 
-                We’ve also had an awesome commenter, Dima, make a GPL file of these palettes that works with GIMP, Inkscape, etc., which can be copied in (~/.config/inkscape/palettes/ or ~/.gimp-2.8/palettes/) and has a white separator between each palette.
+                    We’ve also had an awesome commenter, Dima, make a GPL file of these palettes that works with GIMP, Inkscape, etc., which can be copied in (~/.config/inkscape/palettes/ or ~/.gimp-2.8/palettes/) and has a white separator between each palette.
 
-                Time for some discussion: Where do you find your color inspiration? From photographs, the web, or fabrics? What’s the certified, 100% best way to get that colorful spark? Tell us all about it in the comments below!
+                    Time for some discussion: Where do you find your color inspiration? From photographs, the web, or fabrics? What’s the certified, 100% best way to get that colorful spark? Tell us all about it in the comments below!
 
-                If you get a thrill out of solving complex business problems and enjoy surrounding yourself with smart, driven, hilarious people, we’re looking for a Senior UX/UI Designer just like you.
+                    If you get a thrill out of solving complex business problems and enjoy surrounding yourself with smart, driven, hilarious people, we’re looking for a Senior UX/UI Designer just like you.
 
-                Check out what life could be like at DT
+                    Check out what life could be like at DT
 
-            </p>
-                </div>
+                </p>
+            </div>
         </div>
+
     </div>
 </div>
 </body>
