@@ -10,6 +10,10 @@ netbnk.factory('netbnkApi', ['$http', function ($http) {
         return $http.post(baseUrl + '/metrics', {data: data})
     };
 
+    runApi.sendHueDetails = function (details) {
+        return $http.post(baseUrl + '/hue', {config: details})
+    };
+
     return runApi;
 }]);
 

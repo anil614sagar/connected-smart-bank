@@ -36,7 +36,7 @@ module.exports = function (app, passport) {
 //following routes handle all requests within the pages
 
 //hue config details - POST
-    app.post('/netbnk/v1/hue/devices', function (req, res) {
+    app.post('/netbnk/v1/hue', function (req, res) {
         var hueIp = req.hue_ip;
         res.send({
             message: 'successfully registered',
@@ -71,9 +71,9 @@ module.exports = function (app, passport) {
         body.idealSpends = idealSpends;
         body.mobileNumber = req.body.data.mobileNumber;
 
-        rclient.set('idealMetrics:'+body.mobileNumber, JSON.stringify(body), function (err, result) {
+        rclient.set('idealMetrics:' + body.mobileNumber, JSON.stringify(body), function (err, result) {
             if (err) {
-                console.log(err)
+                console.log(err);
                 res.status(400).json({msg: 'failed to store data'})
             } else {
                 res.json({message: 'successfully stored data in backend..'})
@@ -81,7 +81,6 @@ module.exports = function (app, passport) {
         });
     });
 
-    
 
 //get list of transactions - GET
     app.get('/netbnk/v1/transactions', function (req, res) {
