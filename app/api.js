@@ -7,9 +7,38 @@ var ocpKey = '02a62243728c4da9815414dbee605a1c';
 var bearer = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiNTczNDgxYjllMGEwYmVhMTFkYzRjYjZiIiwicm9sZSI6InVzZXIiLCJwcmltYXJ5U3Vic2NyaWJlcktleSI6IjAyYTYyMjQzNzI4YzRkYTk4MTU0MTRkYmVlNjA1YTFjIiwiaWF0IjoxNDYzMTM1NTkwfQ.qSP7Mu5ETH9vffTkrnc4q-X0GlCc-FO7_kTIDqwVcp8';
 
 var path = require('path')
-
 var redis = require('redis')
 var rclient = redis.createClient()
+
+//hue config
+var Hue = require('node-hue-api');
+var HueApi = Hue.HueApi;
+var lightState = Hue.lightState;
+var hostname = "192.168.1.131",  //change this
+    username = "e6bb9744b3c8af6d0479c212e4e17", //change this
+    state = lightState.create();
+var hueAPI = new HueApi(hostname, username);
+
+state = lightState.create().on().white(500, 100);
+
+var getState = function (stateStr, r, g, b) {
+    if (stateStr === "on")
+        return state.on().rgb(r, g, b);
+    else
+        return state.off().rgb(r, g, b);
+};
+
+var displayError = function (err) {
+    console.log(err);
+};
+
+var displayResult = function (result) {
+    console.log(JSON.stringify(result, null, 2));
+};
+
+var updateHueLights = function (state) {
+    hueAPI.setLightState(1, state).then(displayResult).fail(displayError).done();
+};
 
 
 module.exports = function (app, passport) {
@@ -197,4 +226,43 @@ module.exports = function (app, passport) {
         })
     }
 
-}
+    //route to sense the transaction and light the bulb - transaction
+    app.post('/netbnk/v1/transactions', function (req, res) {
+        console.log(req.body);
+        var payload = {};
+        payload.date = req.body.data.date;
+        payload.bankName = req.body.data.bankName;
+        payload.account_id = req.body.data.account_id;
+        payload.description = req.body.data.description ? req.body.data.description : null;
+        payload.transaction_type = req.body.data.transaction_type;
+        payload.amount = req.body.data.amount;
+        payload.tag = req.body.data.tag;
+        payload.mobileNumber = req.body.data.mobileNumber;
+        //update light here.
+        if (payload.transaction_type) {
+            if (payload.transaction_type == 'credit') {
+                //updateHueLights(getState('on', 0,255,0));
+                //hueAPI.lights().then(displayResult).done();
+                console.log('Green');
+            }
+            else if(payload.transaction_type == 'debit'){
+                console.log('Red');
+                updateHueLights(getState('on', 255, 0, 0));
+                hueAPI.lights().then(displayResult).done();
+            }
+        }
+
+        //set to redis
+        rclient.set('transaction - ' + payload.mobileNumber, JSON.stringify(payload), function (err, result) {
+            if (err) {
+                console.log(err);
+                res.status(400).json({msg: 'failed to store data'})
+            } else {
+                res.json({message: 'successfully stored data in backend..'})
+
+            }
+        })
+
+    });
+
+};
