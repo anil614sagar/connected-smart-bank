@@ -21,13 +21,6 @@ var hueAPI = new HueApi(hostname, username);
 
 state = lightState.create().on().white(500, 100);
 
-var getState = function (stateStr, r, g, b) {
-    if (stateStr === "on")
-        return state.on().rgb(r, g, b);
-    else
-        return state.off().rgb(r, g, b);
-};
-
 var displayError = function (err) {
     console.log(err);
 };
@@ -36,9 +29,11 @@ var displayResult = function (result) {
     console.log(JSON.stringify(result, null, 2));
 };
 
-var updateHueLights = function (state) {
-    hueAPI.setLightState(2, state).then(displayResult).fail(displayError).done();
-};
+//var startState1 = lightState.create().on().rgb(255, 255, 204);
+//hueAPI.setLightState(1, startState1).then(displayResult).fail(displayError).done();
+
+var startState2 = lightState.create().on().rgb(0, 255, 0);
+hueAPI.setLightState(3, startState2).then(displayResult).fail(displayError).done();
 
 
 module.exports = function (app, passport) {
@@ -242,13 +237,21 @@ module.exports = function (app, passport) {
         if (payload.transaction_type) {
             if (payload.transaction_type == 'credit') {
                 console.log('Green');
-                var creditState = lightState.create().on().rgb(0, 255, 0);
+                var creditState = lightState.create().on().rgb(0, 255, 0).longAlert();
                 hueAPI.setLightState(1, creditState).then(displayResult).fail(displayError).done();
+                //changes other light state to indicate health change
+                var otherLightState = lightState.create().on().rgb(218, 122, 122);
+                hueAPI.setLightState(3, otherLightState).then(displayResult).fail(displayError).done();
             }
             else if (payload.transaction_type == 'debit') {
                 console.log('Red');
-                var debState = lightState.create().on().rgb(255, 0, 0);
+                var debState = lightState.create().on().rgb(255, 0, 0).longAlert();
                 hueAPI.setLightState(1, debState).then(displayResult).fail(displayError).done();
+
+                ////changes other light state to indicate health change
+                //var otherLightState = lightState.create().on().rgb(110, 247, 202);
+                //hueAPI.setLightState(3, otherLightState).then(displayResult).fail(displayError).done();
+
             }
         }
 
