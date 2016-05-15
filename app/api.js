@@ -14,8 +14,8 @@ var rclient = redis.createClient()
 var Hue = require('node-hue-api');
 var HueApi = Hue.HueApi;
 var lightState = Hue.lightState;
-var hostname = "192.168.1.131",  //change this
-    username = "e6bb9744b3c8af6d0479c212e4e17", //change this
+var hostname = "192.168.2.3",  //change this
+    username = "iAdSvWo2iN4CP5jv2WVtB6mkcLxPw3wsgprnaBZd", //change this
     state = lightState.create();
 var hueAPI = new HueApi(hostname, username);
 
@@ -37,7 +37,7 @@ var displayResult = function (result) {
 };
 
 var updateHueLights = function (state) {
-    hueAPI.setLightState(1, state).then(displayResult).fail(displayError).done();
+    hueAPI.setLightState(2, state).then(displayResult).fail(displayError).done();
 };
 
 
@@ -241,14 +241,14 @@ module.exports = function (app, passport) {
         //update light here.
         if (payload.transaction_type) {
             if (payload.transaction_type == 'credit') {
-                //updateHueLights(getState('on', 0,255,0));
-                //hueAPI.lights().then(displayResult).done();
                 console.log('Green');
+                var creditState = lightState.create().on().rgb(0, 255, 0);
+                hueAPI.setLightState(1, creditState).then(displayResult).fail(displayError).done();
             }
-            else if(payload.transaction_type == 'debit'){
+            else if (payload.transaction_type == 'debit') {
                 console.log('Red');
-                updateHueLights(getState('on', 255, 0, 0));
-                hueAPI.lights().then(displayResult).done();
+                var debState = lightState.create().on().rgb(255, 0, 0);
+                hueAPI.setLightState(1, debState).then(displayResult).fail(displayError).done();
             }
         }
 
